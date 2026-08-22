@@ -1,0 +1,1946 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>手記の加筆 ミューズ検索</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 20px;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff0f7,
+                    #f1edff,
+                    #e9f8ff
+                );
+
+            font-family:
+                "Yu Gothic",
+                "Meiryo",
+                sans-serif;
+
+            text-align: center;
+            color: #51465c;
+        }
+
+
+        /* ================================
+           メインカード
+           ================================ */
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+
+            background:
+                rgba(255, 255, 255, 0.95);
+
+            border-radius: 30px;
+
+            padding:
+                35px 25px 45px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(120, 90, 140, 0.15);
+        }
+
+
+        /* ================================
+           タイトル
+           ================================ */
+
+        h1 {
+            font-size: 38px;
+
+            color: #c86fa8;
+
+            margin:
+                0 0 12px;
+
+            letter-spacing: 2px;
+        }
+
+
+        .description {
+            font-size: 18px;
+
+            color: #776b80;
+
+            line-height: 1.8;
+
+            margin-bottom: 35px;
+        }
+
+
+        h2 {
+            font-size: 25px;
+
+            color: #8d76c7;
+
+            margin:
+                0 0 25px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ================================
+           ボタン
+           ================================ */
+
+        .choices {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 18px;
+
+            max-width: 600px;
+
+            margin: 0 auto;
+        }
+
+
+        button {
+            padding:
+                20px 15px;
+
+            border: none;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f7a9cf,
+                    #bda9f3
+                );
+
+            color: white;
+
+            font-size: 19px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 5px 12px
+                rgba(150, 110, 170, 0.2);
+
+            transition:
+                0.2s;
+        }
+
+
+        button:hover {
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 8px 16px
+                rgba(150, 110, 170, 0.3);
+        }
+
+
+        button:active {
+            transform:
+                scale(0.97);
+        }
+
+
+        /* ================================
+           通路形状ボタン
+           ================================ */
+
+        .shape-button {
+            min-height: 190px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #faf7ff
+                );
+
+            color: #51465c;
+
+            border:
+                3px solid #decff5;
+        }
+
+
+        .shape-button:hover {
+            border-color:
+                #c9aeea;
+
+            background:
+                #fffaff;
+        }
+
+
+        .shape-name {
+            font-size: 17px;
+
+            color: #776b80;
+        }
+
+
+        /* ================================
+           図形エリア
+           ================================ */
+
+        .shape {
+            position: relative;
+
+            width: 180px;
+            height: 135px;
+        }
+
+
+        .shape-line {
+            position: absolute;
+
+            background:
+                #242126;
+
+            border-radius:
+                2px;
+        }
+
+
+        /* ================================
+           I字
+           ================================ */
+
+        .shape-i .vertical {
+            width: 7px;
+            height: 115px;
+
+            left: 86px;
+            top: 5px;
+        }
+
+
+        /* ================================
+           L字
+           
+           └
+           ================================ */
+
+        .shape-l .vertical {
+            width: 7px;
+            height: 105px;
+
+            left: 25px;
+            top: 5px;
+        }
+
+
+        .shape-l .horizontal {
+            width: 135px;
+            height: 7px;
+
+            left: 25px;
+            bottom: 15px;
+        }
+
+
+        /* ================================
+           逆L字
+
+               │
+               │
+           ────┘
+
+           送ってくれた1枚目を参考
+           ================================ */
+
+        .shape-reverse-l .vertical {
+            width: 7px;
+            height: 105px;
+
+            right: 25px;
+            top: 5px;
+        }
+
+
+        .shape-reverse-l .horizontal {
+            width: 140px;
+            height: 7px;
+
+            left: 5px;
+            bottom: 15px;
+        }
+
+
+        /* ================================
+           逆トの字
+
+           ─────┐
+                │
+                │
+
+           ================================ */
+
+        .shape-reverse-t .vertical {
+            width: 7px;
+            height: 110px;
+
+            right: 25px;
+            top: 5px;
+        }
+
+
+        .shape-reverse-t .horizontal {
+            width: 135px;
+            height: 7px;
+
+            left: 5px;
+            top: 58px;
+        }
+
+
+        /* ================================
+           凸
+
+           ┌────┐
+           │    │
+        ───┘    └───
+        │          │
+        └──────────┘
+
+           送ってくれた画像を参考
+           ================================ */
+
+        .shape-convex {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .shape-convex svg {
+            width: 180px;
+            height: 135px;
+
+            overflow: visible;
+        }
+
+
+        /* ================================
+           逆L字＋横棒
+
+                    ─────────
+                   │
+                   │
+           ────────┘
+
+           送ってくれた2枚目を参考
+
+           「横棒」を別にせず、
+           1本のつながった線として描画
+           ================================ */
+
+        .shape-complex {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .shape-complex svg {
+            width: 180px;
+            height: 135px;
+
+            overflow: visible;
+        }
+
+
+        /* ================================
+           YES / NO
+           ================================ */
+
+        .yes-no {
+            max-width: 500px;
+
+            margin: 0 auto;
+        }
+
+
+        .yes {
+            background:
+                linear-gradient(
+                    135deg,
+                    #f5a5c9,
+                    #e68eb9
+                );
+        }
+
+
+        .no {
+            background:
+                linear-gradient(
+                    135deg,
+                    #aeb5ec,
+                    #8f91d8
+                );
+        }
+
+
+        /* ================================
+           戻るボタン
+           ================================ */
+
+        .back-button {
+            margin-top: 25px;
+
+            background:
+                #ddd5e5;
+
+            color:
+                #655b6b;
+
+            box-shadow:
+                none;
+
+            font-size:
+                16px;
+
+            padding:
+                13px 25px;
+        }
+
+
+        .back-button:hover {
+            background:
+                #d2c7dc;
+
+            box-shadow:
+                none;
+        }
+
+
+        /* ================================
+           結果
+           ================================ */
+
+        .result {
+            padding:
+                25px 15px;
+        }
+
+
+        .result-icon {
+            font-size:
+                50px;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .result-title {
+            font-size:
+                29px;
+
+            color:
+                #c86fa8;
+
+            margin-bottom:
+                20px;
+        }
+
+
+        .result-box {
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff5fb,
+                    #f5f1ff
+                );
+
+            border-radius:
+                22px;
+
+            padding:
+                25px 20px;
+
+            margin:
+                20px auto;
+
+            max-width:
+                560px;
+        }
+
+
+        .result-location {
+            font-size:
+                23px;
+
+            font-weight:
+                bold;
+
+            color:
+                #765fb0;
+
+            line-height:
+                1.7;
+        }
+
+
+        .recommendation {
+            margin-top:
+                18px;
+
+            font-size:
+                19px;
+
+            font-weight:
+                bold;
+
+            color:
+                #c26d9d;
+        }
+
+
+        .not-found {
+            font-size:
+                18px;
+
+            line-height:
+                1.8;
+
+            color:
+                #776b80;
+        }
+
+
+        .hidden {
+            display:
+                none;
+        }
+
+
+        /* ================================
+           スマホ
+           ================================ */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding:
+                    20px 12px;
+            }
+
+
+            .container {
+                padding:
+                    30px 15px 35px;
+
+                border-radius:
+                    25px;
+            }
+
+
+            h1 {
+                font-size:
+                    30px;
+            }
+
+
+            h2 {
+                font-size:
+                    22px;
+            }
+
+
+            .description {
+                font-size:
+                    16px;
+            }
+
+
+            .choices {
+                grid-template-columns:
+                    1fr;
+
+                gap:
+                    14px;
+            }
+
+
+            button {
+                font-size:
+                    18px;
+
+                padding:
+                    18px 10px;
+            }
+
+
+            .shape-button {
+                min-height:
+                    175px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ================================
+         入口選択
+         ================================ -->
+
+    <div id="entrance-screen">
+
+        <h1>
+            手記の加筆<br>
+            ミューズ検索
+        </h1>
+
+
+        <p class="description">
+
+            いくつかの特徴を選択して<br>
+            ミューズの位置を特定します。
+
+        </p>
+
+
+        <h2>
+            ① 入口の形を選択してください
+        </h2>
+
+
+        <div class="choices">
+
+            <button
+                onclick="
+                    selectEntrance(
+                        'center-right-left'
+                    )
+                "
+            >
+                中央＋右＋左
+            </button>
+
+
+            <button
+                onclick="
+                    selectEntrance(
+                        'center-right'
+                    )
+                "
+            >
+                中央＋右
+            </button>
+
+
+            <button
+                onclick="
+                    selectEntrance(
+                        'center-left'
+                    )
+                "
+            >
+                中央＋左
+            </button>
+
+
+            <button
+                onclick="
+                    selectEntrance(
+                        'right-left'
+                    )
+                "
+            >
+                右＋左
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================
+         特殊条件
+         ================================ -->
+
+    <div
+        id="special-screen"
+        class="hidden"
+    >
+
+        <h2>
+            左側に入ってすぐ、<br>
+            部屋がありますか？
+        </h2>
+
+
+        <p class="description">
+
+            「中央＋右＋左」の入口の場合のみ確認します。
+
+        </p>
+
+
+        <div class="choices yes-no">
+
+            <button
+                class="yes"
+                onclick="
+                    specialAnswer(true)
+                "
+            >
+                はい
+            </button>
+
+
+            <button
+                class="no"
+                onclick="
+                    specialAnswer(false)
+                "
+            >
+                いいえ
+            </button>
+
+        </div>
+
+
+        <button
+            class="back-button"
+            onclick="goHome()"
+        >
+            ← 戻る
+        </button>
+
+    </div>
+
+
+
+    <!-- ================================
+         通路形状選択
+         ================================ -->
+
+    <div
+        id="shape-screen"
+        class="hidden"
+    >
+
+        <h2
+            id="shape-question"
+        >
+        </h2>
+
+
+        <div
+            id="shape-choices"
+            class="choices"
+        >
+        </div>
+
+
+        <button
+            class="back-button"
+            onclick="goHome()"
+        >
+            ← 最初に戻る
+        </button>
+
+    </div>
+
+
+
+    <!-- ================================
+         結果
+         ================================ -->
+
+    <div
+        id="result-screen"
+        class="hidden"
+    >
+
+        <div class="result">
+
+            <div class="result-icon">
+                🎯
+            </div>
+
+
+            <div class="result-title">
+                ミューズ部屋を発見！
+            </div>
+
+
+            <div class="result-box">
+
+                <div
+                    id="result-location"
+                    class="result-location"
+                >
+                </div>
+
+
+                <div
+                    id="result-recommendation"
+                    class="recommendation"
+                >
+                </div>
+
+            </div>
+
+
+            <button
+                onclick="goHome()"
+            >
+                もう一度検索する
+            </button>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   ★★★★★ 判定データ ★★★★★
+
+   新しいマップを追加するときは、
+   この部分にデータを追加するだけ。
+
+   ===================================================== */
+
+
+const patterns = [
+
+
+    /* ==============================================
+       ① 右＋左
+
+       左 → 逆トの字
+       右 → 逆L字
+
+       ミューズ → 右側
+       おすすめ → 右
+       ============================================== */
+
+    {
+        entrance:
+            "right-left",
+
+        conditions: {
+
+            left:
+                "reverse-t",
+
+            right:
+                "reverse-l"
+
+        },
+
+        location:
+            "右側にミューズ部屋があります！",
+
+        recommendation:
+            "⭐ 右側から進むのがおすすめです！"
+    },
+
+
+    /* ==============================================
+       ② 中央＋右
+
+       中央 → I字
+       右 → 凸
+
+       ミューズ → 中央寄りの右奥
+       おすすめ → 右
+       ============================================== */
+
+    {
+        entrance:
+            "center-right",
+
+        conditions: {
+
+            center:
+                "i",
+
+            right:
+                "convex"
+
+        },
+
+        location:
+            "中央寄りの右奥にミューズ部屋があります！",
+
+        recommendation:
+            "⭐ 右側から進むのがおすすめです！"
+    },
+
+
+    /* ==============================================
+       ③ 中央＋左
+
+       中央 → I字
+       左 → L字
+
+       ミューズ → 中央奥
+       おすすめ → 中央
+       ============================================== */
+
+    {
+        entrance:
+            "center-left",
+
+        conditions: {
+
+            center:
+                "i",
+
+            left:
+                "l"
+
+        },
+
+        location:
+            "中央奥にミューズ部屋があります！",
+
+        recommendation:
+            "⭐ 中央から進むのがおすすめです！"
+    },
+
+
+    /* ==============================================
+       ④ 中央＋右＋左
+
+       中央 → I字
+       右 → 逆L字＋横棒
+       左 → 逆L字
+
+       ミューズ → 右奥
+       おすすめ → 右
+       ============================================== */
+
+    {
+        entrance:
+            "center-right-left",
+
+        conditions: {
+
+            center:
+                "i",
+
+            right:
+                "complex",
+
+            left:
+                "reverse-l"
+
+        },
+
+        location:
+            "右奥にミューズ部屋があります！",
+
+        recommendation:
+            "⭐ 右側から進むのがおすすめです！"
+    }
+
+];
+
+
+
+/* =====================================================
+   図形の名前
+   ===================================================== */
+
+const shapeNames = {
+
+    i:
+        "I字",
+
+    l:
+        "L字",
+
+    "reverse-l":
+        "逆L字",
+
+    "reverse-t":
+        "逆トの字",
+
+    convex:
+        "凸",
+
+    complex:
+        "逆L字＋横棒"
+
+};
+
+
+
+/* =====================================================
+   状態
+   ===================================================== */
+
+let currentEntrance =
+    null;
+
+
+let answers =
+    {};
+
+
+let currentDirection =
+    null;
+
+
+
+/* =====================================================
+   入口選択
+   ===================================================== */
+
+function selectEntrance(
+    entrance
+) {
+
+    currentEntrance =
+        entrance;
+
+
+    answers =
+        {};
+
+
+    hideAllScreens();
+
+
+    /*
+     * 中央＋右＋左だけは、
+     * 最初に特殊条件を確認
+     */
+
+    if (
+        entrance ===
+        "center-right-left"
+    ) {
+
+        document
+            .getElementById(
+                "special-screen"
+            )
+            .classList
+            .remove("hidden");
+
+        return;
+    }
+
+
+    showNextShape();
+
+}
+
+
+
+/* =====================================================
+   特殊条件
+   ===================================================== */
+
+function specialAnswer(
+    hasRoom
+) {
+
+
+    /*
+     * 左側に入ってすぐ
+     * 部屋があった場合
+     */
+
+    if (
+        hasRoom
+    ) {
+
+        showResult(
+
+            "左側にミューズ部屋があります！",
+
+            "⭐ 左側から進むのがおすすめです！"
+
+        );
+
+        return;
+    }
+
+
+    /*
+     * 部屋がなかった場合
+     */
+
+    answers.special =
+        false;
+
+
+    showNextShape();
+
+}
+
+
+
+/* =====================================================
+   現在の入口・方向に存在する
+   図形だけを取得
+   ===================================================== */
+
+function getAvailableShapes(
+
+    entrance,
+
+    direction
+
+) {
+
+    const availableShapes =
+        new Set();
+
+
+    patterns
+        .filter(
+            pattern =>
+                pattern.entrance ===
+                entrance
+        )
+        .forEach(
+            pattern => {
+
+                if (
+                    pattern.conditions[
+                        direction
+                    ]
+                ) {
+
+                    availableShapes.add(
+
+                        pattern.conditions[
+                            direction
+                        ]
+
+                    );
+                }
+
+            }
+        );
+
+
+    return Array.from(
+        availableShapes
+    );
+
+}
+
+
+
+/* =====================================================
+   次の質問
+   ===================================================== */
+
+function showNextShape() {
+
+    hideAllScreens();
+
+
+    let requiredDirections =
+        [];
+
+
+    /*
+     * 入口ごとの確認順
+     */
+
+    if (
+        currentEntrance ===
+        "right-left"
+    ) {
+
+        requiredDirections = [
+
+            "left",
+            "right"
+
+        ];
+
+    }
+
+
+    else if (
+        currentEntrance ===
+        "center-right"
+    ) {
+
+        requiredDirections = [
+
+            "center",
+            "right"
+
+        ];
+
+    }
+
+
+    else if (
+        currentEntrance ===
+        "center-left"
+    ) {
+
+        requiredDirections = [
+
+            "center",
+            "left"
+
+        ];
+
+    }
+
+
+    else if (
+        currentEntrance ===
+        "center-right-left"
+    ) {
+
+        requiredDirections = [
+
+            "center",
+            "right",
+            "left"
+
+        ];
+
+    }
+
+
+
+    /*
+     * まだ回答していない方向を探す
+     */
+
+    const nextDirection =
+
+        requiredDirections.find(
+
+            direction =>
+
+                answers[
+                    direction
+                ] === undefined
+
+        );
+
+
+
+    /*
+     * 全部回答済み
+     */
+
+    if (
+        !nextDirection
+    ) {
+
+        checkResult();
+
+        return;
+    }
+
+
+    currentDirection =
+        nextDirection;
+
+
+
+    const directionNames = {
+
+        center:
+            "中央",
+
+        right:
+            "右",
+
+        left:
+            "左"
+
+    };
+
+
+    document
+        .getElementById(
+            "shape-question"
+        )
+        .textContent =
+
+        `${directionNames[nextDirection]}の通路はどの形？`;
+
+
+
+    /*
+     * 登録されている形だけ取得
+     */
+
+    const availableShapes =
+
+        getAvailableShapes(
+
+            currentEntrance,
+
+            nextDirection
+
+        );
+
+
+
+    const choices =
+
+        document
+            .getElementById(
+                "shape-choices"
+            );
+
+
+    choices.innerHTML =
+        "";
+
+
+
+    /*
+     * 選択肢を生成
+     */
+
+    availableShapes.forEach(
+
+        shape => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className =
+                "shape-button";
+
+
+            button.innerHTML =
+
+                createShapeHTML(
+                    shape
+                )
+
+                +
+
+                `
+                <span
+                    class="shape-name"
+                >
+                    ${shapeNames[shape]}
+                </span>
+                `;
+
+
+            button.onclick =
+
+                function() {
+
+                    answers[
+                        currentDirection
+                    ] =
+                        shape;
+
+
+                    showNextShape();
+
+                };
+
+
+            choices.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+
+    /*
+     * 登録されていない場合
+     */
+
+    if (
+        availableShapes.length ===
+        0
+    ) {
+
+        choices.innerHTML = `
+
+            <div
+                class="not-found"
+            >
+
+                この方向に登録されている
+                通路形状がありません。
+
+            </div>
+
+        `;
+    }
+
+
+    document
+        .getElementById(
+            "shape-screen"
+        )
+        .classList
+        .remove("hidden");
+
+}
+
+
+
+/* =====================================================
+   図形を作成
+   ===================================================== */
+
+function createShapeHTML(
+    shape
+) {
+
+
+    /* ================================
+       I字
+       ================================ */
+
+    if (
+        shape === "i"
+    ) {
+
+        return `
+
+            <div
+                class="shape shape-i"
+            >
+
+                <div
+                    class="shape-line vertical"
+                >
+                </div>
+
+            </div>
+
+        `;
+    }
+
+
+
+    /* ================================
+       L字
+       ================================ */
+
+    if (
+        shape === "l"
+    ) {
+
+        return `
+
+            <div
+                class="shape shape-l"
+            >
+
+                <div
+                    class="shape-line vertical"
+                >
+                </div>
+
+                <div
+                    class="shape-line horizontal"
+                >
+                </div>
+
+            </div>
+
+        `;
+    }
+
+
+
+    /* ================================
+       逆L字
+       ================================ */
+
+    if (
+        shape === "reverse-l"
+    ) {
+
+        return `
+
+            <div
+                class="shape shape-reverse-l"
+            >
+
+                <div
+                    class="shape-line vertical"
+                >
+                </div>
+
+                <div
+                    class="shape-line horizontal"
+                >
+                </div>
+
+            </div>
+
+        `;
+    }
+
+
+
+    /* ================================
+       逆トの字
+       ================================ */
+
+    if (
+        shape === "reverse-t"
+    ) {
+
+        return `
+
+            <div
+                class="shape shape-reverse-t"
+            >
+
+                <div
+                    class="shape-line vertical"
+                >
+                </div>
+
+                <div
+                    class="shape-line horizontal"
+                >
+                </div>
+
+            </div>
+
+        `;
+    }
+
+
+
+    /* ================================
+       凸
+       ================================ */
+
+    if (
+        shape === "convex"
+    ) {
+
+        return `
+
+            <div
+                class="shape shape-convex"
+            >
+
+                <svg
+                    width="180"
+                    height="135"
+                    viewBox="0 0 180 135"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+
+                    <polyline
+
+                        points="
+                            10,110
+                            10,60
+                            70,60
+                            75,25
+                            120,25
+                            120,60
+                            160,60
+                            160,110
+                            10,110
+                        "
+
+                        fill="none"
+
+                        stroke="#242126"
+
+                        stroke-width="7"
+
+                        stroke-linejoin="round"
+
+                        stroke-linecap="round"
+
+                    />
+
+                </svg>
+
+            </div>
+
+        `;
+    }
+
+
+
+    /* ================================
+       逆L字＋横棒
+
+       送ってくれた2枚目を参考。
+
+       左下から右へ進み、
+       途中で上へ曲がり、
+       そのまま右方向へ伸びる
+       「一本のつながった形」。
+
+               ─────────
+              │
+              │
+       ───────┘
+
+       ================================ */
+
+    if (
+        shape === "complex"
+    ) {
+
+        return `
+
+            <div
+                class="shape shape-complex"
+            >
+
+                <svg
+                    width="180"
+                    height="135"
+                    viewBox="0 0 180 135"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+
+                    <polyline
+
+                        points="
+                            8,105
+                            82,105
+                            78,25
+                            165,25
+                        "
+
+                        fill="none"
+
+                        stroke="#242126"
+
+                        stroke-width="7"
+
+                        stroke-linejoin="round"
+
+                        stroke-linecap="round"
+
+                    />
+
+                </svg>
+
+            </div>
+
+        `;
+    }
+
+
+    return "";
+
+}
+
+
+
+/* =====================================================
+   判定
+   ===================================================== */
+
+function checkResult() {
+
+
+    const possiblePatterns =
+
+        patterns.filter(
+
+            pattern =>
+
+                pattern.entrance ===
+                currentEntrance
+
+        );
+
+
+
+    /*
+     * 全条件が一致するパターンを探す
+     */
+
+    const matchedPattern =
+
+        possiblePatterns.find(
+
+            pattern => {
+
+                return Object.keys(
+
+                    pattern.conditions
+
+                ).every(
+
+                    direction => {
+
+                        return (
+
+                            answers[
+                                direction
+                            ]
+
+                            ===
+
+                            pattern.conditions[
+                                direction
+                            ]
+
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+
+    /*
+     * 一致した場合
+     */
+
+    if (
+        matchedPattern
+    ) {
+
+        showResult(
+
+            matchedPattern.location,
+
+            matchedPattern.recommendation
+
+        );
+
+        return;
+    }
+
+
+
+    /*
+     * 未登録の組み合わせ
+     */
+
+    hideAllScreens();
+
+
+    document
+        .getElementById(
+            "result-location"
+        )
+        .innerHTML = `
+
+            <div
+                class="not-found"
+            >
+
+                ごめんなさい。<br><br>
+
+                この通路の組み合わせは、
+                現在登録されていません。<br><br>
+
+                新しいマップが分かったら、
+                判定データに追加できます！
+
+            </div>
+
+        `;
+
+
+    document
+        .getElementById(
+            "result-recommendation"
+        )
+        .textContent =
+            "";
+
+
+    document
+        .getElementById(
+            "result-screen"
+        )
+        .classList
+        .remove("hidden");
+
+}
+
+
+
+/* =====================================================
+   結果表示
+   ===================================================== */
+
+function showResult(
+
+    location,
+
+    recommendation
+
+) {
+
+    hideAllScreens();
+
+
+    document
+        .getElementById(
+            "result-location"
+        )
+        .textContent =
+            location;
+
+
+    document
+        .getElementById(
+            "result-recommendation"
+        )
+        .textContent =
+            recommendation;
+
+
+    document
+        .getElementById(
+            "result-screen"
+        )
+        .classList
+        .remove("hidden");
+
+}
+
+
+
+/* =====================================================
+   全画面を隠す
+   ===================================================== */
+
+function hideAllScreens() {
+
+    document
+        .getElementById(
+            "entrance-screen"
+        )
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById(
+            "special-screen"
+        )
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById(
+            "shape-screen"
+        )
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById(
+            "result-screen"
+        )
+        .classList
+        .add("hidden");
+
+}
+
+
+
+/* =====================================================
+   最初に戻る
+   ===================================================== */
+
+function goHome() {
+
+    currentEntrance =
+        null;
+
+
+    answers =
+        {};
+
+
+    currentDirection =
+        null;
+
+
+    hideAllScreens();
+
+
+    document
+        .getElementById(
+            "entrance-screen"
+        )
+        .classList
+        .remove("hidden");
+
+}
+
+
+</script>
+
+
+</body>
+</html>
