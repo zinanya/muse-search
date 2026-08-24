@@ -7,6 +7,7 @@
 <title>手記の加筆 ミューズ検索</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -20,7 +21,7 @@ body {
         linear-gradient(
             135deg,
             #fff0f7,
-            #f2edff,
+            #f1edff,
             #e9f8ff
         );
 
@@ -44,66 +45,43 @@ body {
     padding: 32px 22px 40px;
 
     box-shadow:
-        0 8px 25px
-        rgba(120,90,140,0.15);
+        0 8px 25px rgba(120,90,140,0.15);
 }
-
-/* =========================
-   タイトル
-========================= */
 
 h1 {
     font-size: 36px;
     color: #c86fa8;
-
-    margin:
-        0 0 12px;
-
+    margin: 0 0 12px;
     letter-spacing: 2px;
 }
 
 .description {
     font-size: 17px;
     color: #776b80;
-
     line-height: 1.8;
-
     margin-bottom: 30px;
 }
 
 h2 {
     font-size: 24px;
     color: #8d76c7;
-
-    margin:
-        0 0 22px;
-
+    margin: 0 0 22px;
     line-height: 1.5;
 }
 
-/* =========================
-   選択肢
-========================= */
-
 .choices {
     display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 14px;
-
-    max-width: 650px;
-
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
 button {
+    padding: 18px 12px;
+
     border: none;
     border-radius: 18px;
-
-    padding:
-        18px 14px;
 
     background:
         linear-gradient(
@@ -120,41 +98,36 @@ button {
     cursor: pointer;
 
     box-shadow:
-        0 5px 12px
-        rgba(150,110,170,0.18);
+        0 5px 12px rgba(150,110,170,0.18);
 
-    transition:
-        transform 0.2s,
-        box-shadow 0.2s;
+    transition: 0.2s;
 }
 
 button:hover {
     transform: translateY(-2px);
 
     box-shadow:
-        0 7px 15px
-        rgba(150,110,170,0.25);
+        0 8px 16px rgba(150,110,170,0.25);
 }
 
 button:active {
     transform: scale(0.97);
 }
 
-/* =========================
-   図形ボタン
-========================= */
+/* ================================
+   通路形状ボタン
+================================ */
 
 .shape-button {
     min-height: 165px;
 
     display: flex;
-
     flex-direction: column;
 
     align-items: center;
     justify-content: center;
 
-    gap: 8px;
+    gap: 7px;
 
     background:
         linear-gradient(
@@ -170,11 +143,8 @@ button:active {
 }
 
 .shape-button:hover {
-    border-color:
-        #c9aeea;
-
-    background:
-        #fffaff;
+    border-color: #c9aeea;
+    background: #fffaff;
 }
 
 .shape-name {
@@ -182,371 +152,380 @@ button:active {
     color: #776b80;
 }
 
-/* =========================
+/* ================================
    図形共通
-========================= */
+================================ */
 
 .shape {
-    width: 150px;
-    height: 110px;
-
     position: relative;
 
+    width: 145px;
+    height: 110px;
+}
+
+.shape-line {
+    position: absolute;
+
+    background: #8e75c4;
+
+    border-radius: 3px;
+}
+
+/* ================================
+   I字
+================================ */
+
+.shape-i .vertical {
+    width: 6px;
+    height: 92px;
+
+    left: 69px;
+    top: 8px;
+}
+
+/* ================================
+   L字
+================================ */
+
+.shape-l .vertical {
+    width: 6px;
+    height: 82px;
+
+    left: 22px;
+    top: 8px;
+}
+
+.shape-l .horizontal {
+    width: 105px;
+    height: 6px;
+
+    left: 22px;
+    bottom: 12px;
+}
+
+/* ================================
+   逆L字
+================================ */
+
+.shape-reverse-l .vertical {
+    width: 6px;
+    height: 82px;
+
+    right: 22px;
+    top: 8px;
+}
+
+.shape-reverse-l .horizontal {
+    width: 108px;
+    height: 6px;
+
+    left: 8px;
+    bottom: 12px;
+}
+
+/* ================================
+   逆トの字
+================================ */
+
+.shape-reverse-t .vertical {
+    width: 6px;
+    height: 88px;
+
+    right: 22px;
+    top: 8px;
+}
+
+.shape-reverse-t .horizontal {
+    width: 105px;
+    height: 6px;
+
+    left: 8px;
+    top: 47px;
+}
+
+/* ================================
+   横棒
+================================ */
+
+.shape-horizontal .horizontal {
+    width: 125px;
+    height: 6px;
+
+    left: 10px;
+    top: 52px;
+}
+
+/* ================================
+   凸
+================================ */
+
+.shape-convex {
     display: flex;
 
     align-items: center;
     justify-content: center;
 }
 
-.shape-line {
-    position: absolute;
-
-    background:
-        #51465c;
-
-    border-radius: 3px;
-}
-
-/* =========================
-   I字
-========================= */
-
-.shape-i .vertical {
-    width: 5px;
-    height: 92px;
-
-    left: 72px;
-    top: 9px;
-}
-
-/* =========================
-   L字
-========================= */
-
-.shape-l .vertical {
-    width: 5px;
-    height: 82px;
-
-    left: 20px;
-    top: 8px;
-}
-
-.shape-l .horizontal {
-    width: 110px;
-    height: 5px;
-
-    left: 20px;
-    bottom: 14px;
-}
-
-/* =========================
-   逆L字
-========================= */
-
-.shape-reverse-l .vertical {
-    width: 5px;
-    height: 82px;
-
-    right: 20px;
-    top: 8px;
-}
-
-.shape-reverse-l .horizontal {
-    width: 115px;
-    height: 5px;
-
-    left: 8px;
-    bottom: 14px;
-}
-
-/* =========================
-   逆トの字
-========================= */
-
-.shape-reverse-t .vertical {
-    width: 5px;
-    height: 86px;
-
-    right: 20px;
-    top: 8px;
-}
-
-.shape-reverse-t .horizontal {
-    width: 110px;
-    height: 5px;
-
-    left: 8px;
-    top: 50px;
-}
-
-/* =========================
-   トの字
-========================= */
-
-.shape-t .vertical {
-    width: 5px;
-    height: 82px;
-
-    left: 72px;
-    top: 25px;
-}
-
-.shape-t .horizontal {
-    width: 115px;
-    height: 5px;
-
-    left: 20px;
-    top: 25px;
-}
-
-/* =========================
-   凸
-========================= */
-
 .shape-convex svg {
-    width: 150px;
+    width: 145px;
     height: 110px;
 }
 
-/* =========================
+/* ================================
    逆L字＋横棒
-========================= */
+================================ */
+
+.shape-complex {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
 
 .shape-complex svg {
-    width: 150px;
+    width: 145px;
     height: 110px;
 }
 
-/* =========================
+/* ================================
+   1マス部屋
+================================ */
+
+.shape-room {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.shape-room .room-box {
+    position: absolute;
+
+    width: 30px;
+    height: 30px;
+
+    left: 57px;
+    top: 38px;
+
+    border:
+        5px solid #8e75c4;
+
+    background: #ffffff;
+}
+
+/* ================================
    1マス部屋＋十字
-
-       十
-       □
-
-   「十」と「□」を
-   くっつけて表示
-========================= */
+================================ */
 
 .shape-room-cross {
-    width: 150px;
-    height: 110px;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
 }
 
 .shape-room-cross .cross {
     position: absolute;
 
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
 
-    left: 59px;
-    top: 12px;
+    left: 54px;
+    top: 8px;
 }
 
-.shape-room-cross .cross::before,
+/* 縦 */
+.shape-room-cross .cross::before {
+    content: "";
+
+    position: absolute;
+
+    width: 6px;
+    height: 36px;
+
+    left: 15px;
+    top: 0;
+
+    background: #8e75c4;
+
+    border-radius: 3px;
+}
+
+/* 横 */
 .shape-room-cross .cross::after {
     content: "";
 
     position: absolute;
 
-    background: #51465c;
-
-    border-radius: 2px;
-}
-
-.shape-room-cross .cross::before {
-    width: 32px;
-    height: 5px;
+    width: 36px;
+    height: 6px;
 
     left: 0;
-    top: 13px;
-}
+    top: 15px;
 
-.shape-room-cross .cross::after {
-    width: 5px;
-    height: 32px;
-
-    left: 13px;
-    top: 0;
-}
-
-.shape-room-cross .room {
-    position: absolute;
-
-    width: 32px;
-    height: 32px;
-
-    left: 59px;
-    top: 46px;
-
-    border:
-        5px solid #51465c;
-
-    background:
-        transparent;
-
-    border-radius: 2px;
-}
-
-/* =========================
-   1マス部屋＋ホール
-
-   ┌─────────┐
-   │         │
-   │         │
-   └────┬────┘
-        □
-
-   大きい四角の下に
-   1マス部屋
-========================= */
-
-.shape-room-hall {
-    width: 150px;
-    height: 110px;
-}
-
-.shape-room-hall .hall {
-    position: absolute;
-
-    width: 100px;
-    height: 62px;
-
-    left: 25px;
-    top: 8px;
-
-    border:
-        5px solid #51465c;
+    background: #8e75c4;
 
     border-radius: 3px;
 }
 
-.shape-room-hall .room {
-    position: absolute;
-
-    width: 27px;
-    height: 27px;
-
-    left: 61px;
-    top: 68px;
-
-    border:
-        5px solid #51465c;
-
-    background:
-        #ffffff;
-
-    border-radius: 2px;
-}
-
-/* =========================
-   大部屋
-========================= */
-
-.shape-large-room {
-    width: 150px;
-    height: 110px;
-}
-
-.shape-large-room .room {
-    width: 105px;
-    height: 75px;
-
-    border:
-        5px solid #51465c;
-
-    border-radius: 3px;
-}
-
-/* =========================
-   1マス部屋
-========================= */
-
-.shape-one-room {
-    width: 150px;
-    height: 110px;
-}
-
-.shape-one-room .room {
-    width: 34px;
-    height: 34px;
-
-    border:
-        5px solid #51465c;
-
-    border-radius: 2px;
-}
-
-/* =========================
-   1マス＋I字
-========================= */
-
-.shape-room-i {
-    width: 150px;
-    height: 110px;
-}
-
-.shape-room-i .room {
+.shape-room-cross .room-box {
     position: absolute;
 
     width: 28px;
     height: 28px;
 
-    left: 61px;
+    left: 58px;
+    top: 50px;
+
+    border:
+        5px solid #8e75c4;
+
+    background: white;
+}
+
+.shape-room-cross .entrance {
+    position: absolute;
+
+    width: 6px;
+    height: 20px;
+
+    left: 69px;
+    top: 78px;
+
+    background: #8e75c4;
+
+    border-radius: 3px;
+}
+
+/* ================================
+   1マス部屋＋ホール
+================================ */
+
+.shape-room-hall {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.shape-room-hall .hall {
+    position: absolute;
+
+    width: 92px;
+    height: 62px;
+
+    left: 26px;
     top: 8px;
 
     border:
-        5px solid #51465c;
+        5px solid #8e75c4;
+
+    background: white;
+
+    border-radius: 3px;
 }
 
-.shape-room-i .vertical {
+.shape-room-hall .room-box {
     position: absolute;
 
-    width: 5px;
-    height: 60px;
+    width: 28px;
+    height: 28px;
 
-    left: 72px;
-    top: 36px;
+    left: 58px;
+    top: 66px;
 
-    background: #51465c;
+    border:
+        5px solid #8e75c4;
+
+    background: white;
 }
 
-/* =========================
-   1マス＋十字
-========================= */
+.shape-room-hall .entrance {
+    position: absolute;
 
-.shape-room-cross-simple {
-    width: 150px;
+    width: 6px;
+    height: 18px;
+
+    left: 69px;
+    top: 89px;
+
+    background: #8e75c4;
+
+    border-radius: 3px;
+}
+
+/* ================================
+   1マス部屋＋十字
+   別方向版
+================================ */
+
+.shape-room-cross-horizontal {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.shape-room-cross-horizontal svg {
+    width: 145px;
     height: 110px;
 }
 
-/* =========================
-   逆L＋逆L複合
-========================= */
+/* ================================
+   大部屋
+================================ */
 
-.shape-double-reverse-l svg {
-    width: 150px;
+.shape-large-room {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.shape-large-room .large-room {
+    width: 105px;
+    height: 75px;
+
+    border:
+        5px solid #8e75c4;
+
+    background: white;
+
+    border-radius: 4px;
+}
+
+/* ================================
+   逆L＋逆さま逆L
+================================ */
+
+.shape-double-reverse {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.shape-double-reverse svg {
+    width: 145px;
     height: 110px;
 }
 
-/* =========================
+/* ================================
    結果
-========================= */
+================================ */
 
 .result {
-    padding:
-        20px 10px;
+    padding: 15px 10px;
 }
 
 .result-icon {
-    font-size: 45px;
+    font-size: 46px;
     margin-bottom: 8px;
 }
 
 .result-title {
     font-size: 28px;
-
     color: #c86fa8;
-
     margin-bottom: 18px;
 }
 
@@ -560,14 +539,11 @@ button:active {
 
     border-radius: 22px;
 
-    padding:
-        22px 18px;
+    padding: 23px 18px;
 
-    margin:
-        18px auto;
+    margin: 18px auto;
 
-    max-width:
-        570px;
+    max-width: 580px;
 }
 
 .result-location {
@@ -583,7 +559,7 @@ button:active {
 .recommendation {
     margin-top: 16px;
 
-    font-size: 18px;
+    font-size: 17px;
 
     font-weight: bold;
 
@@ -593,71 +569,19 @@ button:active {
 }
 
 .time-warning {
-    margin-top: 15px;
+    margin-top: 18px;
 
-    font-size: 16px;
+    padding: 12px 15px;
 
-    color: #806f85;
+    border-radius: 15px;
 
-    line-height: 1.7;
-}
+    background: #fff0f7;
 
-/* =========================
-   戻る
-========================= */
+    color: #9b6c87;
 
-.back-button {
-    margin-top: 22px;
+    font-size: 15px;
 
-    background:
-        #ddd5e5;
-
-    color:
-        #655b6b;
-
-    box-shadow:
-        none;
-
-    font-size:
-        15px;
-
-    padding:
-        12px 22px;
-}
-
-.back-button:hover {
-    background:
-        #d2c7dc;
-
-    box-shadow:
-        none;
-}
-
-/* =========================
-   その他
-========================= */
-
-.yes-no {
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.yes {
-    background:
-        linear-gradient(
-            135deg,
-            #f5a5c9,
-            #e68eb9
-        );
-}
-
-.no {
-    background:
-        linear-gradient(
-            135deg,
-            #aeb5ec,
-            #8f91d8
-        );
+    font-weight: bold;
 }
 
 .not-found {
@@ -666,77 +590,76 @@ button:active {
     line-height: 1.8;
 
     color: #776b80;
+}
 
-    grid-column:
-        1 / -1;
+.back-button {
+    margin-top: 22px;
+
+    background: #ddd5e5;
+
+    color: #655b6b;
+
+    box-shadow: none;
+
+    font-size: 15px;
+
+    padding: 12px 23px;
+}
+
+.back-button:hover {
+    background: #d2c7dc;
+    box-shadow: none;
 }
 
 .hidden {
     display: none;
 }
 
-/* =========================
+/* ================================
    スマホ
-========================= */
+================================ */
 
 @media (max-width: 600px) {
 
     body {
-        padding:
-            15px 10px;
+        padding: 18px 10px;
     }
 
     .container {
         padding:
-            28px 14px 35px;
+            27px 13px 32px;
 
-        border-radius:
-            24px;
+        border-radius: 25px;
     }
 
     h1 {
-        font-size:
-            29px;
+        font-size: 29px;
     }
 
     h2 {
-        font-size:
-            21px;
+        font-size: 21px;
     }
 
     .description {
-        font-size:
-            15px;
+        font-size: 15px;
     }
 
     .choices {
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 
     button {
-        font-size:
-            17px;
-
-        padding:
-            17px 10px;
+        font-size: 17px;
+        padding: 17px 10px;
     }
 
     .shape-button {
-        min-height:
-            150px;
+        min-height: 155px;
     }
 
-    .result-title {
-        font-size:
-            25px;
-    }
-
-    .result-location {
-        font-size:
-            19px;
-    }
 }
+
 </style>
 </head>
 
@@ -744,9 +667,9 @@ button:active {
 
 <div class="container">
 
-<!-- =========================
+<!-- ================================
      入口選択
-========================= -->
+================================ -->
 
 <div id="entrance-screen">
 
@@ -787,9 +710,10 @@ button:active {
 </div>
 
 
-<!-- =========================
+<!-- ================================
      特殊条件
-========================= -->
+     中央＋左
+================================ -->
 
 <div id="special-screen" class="hidden">
 
@@ -799,10 +723,10 @@ button:active {
     </h2>
 
     <p class="description">
-        「中央＋左」の入口の場合に確認します。
+        「中央＋左」の入口の場合のみ確認します。
     </p>
 
-    <div class="choices yes-no">
+    <div class="choices">
 
         <button
             class="yes"
@@ -830,9 +754,9 @@ button:active {
 </div>
 
 
-<!-- =========================
+<!-- ================================
      通路形状選択
-========================= -->
+================================ -->
 
 <div id="shape-screen" class="hidden">
 
@@ -853,9 +777,9 @@ button:active {
 </div>
 
 
-<!-- =========================
+<!-- ================================
      結果
-========================= -->
+================================ -->
 
 <div id="result-screen" class="hidden">
 
@@ -881,10 +805,7 @@ button:active {
                 class="recommendation"
             ></div>
 
-            <div
-                id="result-warning"
-                class="time-warning"
-            >
+            <div class="time-warning">
                 ⏰ 時間に気を付けてね！
             </div>
 
@@ -904,10 +825,7 @@ button:active {
 <script>
 
 /* =====================================================
-   ★ 判定データ ★
-
-   新しいマップを追加するときは、
-   この patterns に追加するだけ。
+   判定データ
 ===================================================== */
 
 const patterns = [
@@ -923,7 +841,7 @@ const patterns = [
 
         conditions: {
             left: "i",
-            center: "one-room",
+            center: "room",
             right: "l"
         },
 
@@ -931,22 +849,18 @@ const patterns = [
             "右側にミューズ部屋があります！",
 
         recommendation:
-            "☆ 中央から右に進むのがおすすめです！"
+            "⭐ 中央から右に進むのがおすすめです！"
     },
 
 
-    /* ② L＋C＋R
-       L → 横棒
-       C → 1マス部屋
-       R → ト字
-    */
+    /* ② L＋C＋R */
 
     {
         entrance: "center-right-left",
 
         conditions: {
             left: "horizontal",
-            center: "one-room",
+            center: "room",
             right: "t"
         },
 
@@ -954,15 +868,11 @@ const patterns = [
             "中央奥にミューズ部屋があります！",
 
         recommendation:
-            "☆ 中央から進んで、やや左に向かうのがおすすめです！"
+            "⭐ 中央から進んで、やや左に向かうのがおすすめです！"
     },
 
 
-    /* ③ L＋C＋R
-       L → 逆L字
-       C → 1マス部屋＋十字
-       R → L字
-    */
+    /* ③ L＋C＋R */
 
     {
         entrance: "center-right-left",
@@ -977,12 +887,12 @@ const patterns = [
             "右奥にミューズ部屋があります！",
 
         recommendation:
-            "☆ 中央から進んで、右側に向かうのがおすすめです！"
+            "⭐ 中央から進んで、右側に向かうのがおすすめです！"
     },
 
 
     /* ④ L＋C
-       L → すぐに部屋
+       L → すぐ部屋
        C → 1マス部屋＋ホール
     */
 
@@ -990,7 +900,7 @@ const patterns = [
         entrance: "center-left",
 
         conditions: {
-            left: "one-room",
+            left: "room",
             center: "room-hall"
         },
 
@@ -998,14 +908,11 @@ const patterns = [
             "左側にミューズ部屋があります！",
 
         recommendation:
-            "☆ 左に入ってすぐに部屋があるなら、確定で左側にミューズがあります！"
+            "⭐ 左に入ってすぐに部屋があるなら、左側に進むのがおすすめです！"
     },
 
 
-    /* ⑤ L＋C
-       L → L字
-       C → 1マス＋I字
-    */
+    /* ⑤ L＋C */
 
     {
         entrance: "center-left",
@@ -1019,35 +926,29 @@ const patterns = [
             "中央奥にミューズ部屋があります！",
 
         recommendation:
-            "☆ 中央から進むのがおすすめです。階段のある通路は通り抜けてね！"
+            "⭐ 中央から進むのがおすすめです！ 階段のある通路は通り抜けてね。"
     },
 
 
-    /* ⑥ C＋R
-       C → 1マス部屋＋十字
-       R → 特殊な複合形
-    */
+    /* ⑥ C＋R */
 
     {
         entrance: "center-right",
 
         conditions: {
             center: "room-cross",
-            right: "double-reverse-l"
+            right: "double-reverse"
         },
 
         location:
             "中央奥にミューズ部屋があります！",
 
         recommendation:
-            "☆ 中央から進んで、Y字路を左に曲がるのがおすすめです！"
+            "⭐ 中央から進んで、Y字路を左に曲がるのがおすすめです！"
     },
 
 
-    /* ⑦ C＋R
-       C → 1マス部屋＋十字
-       R → 大部屋
-    */
+    /* ⑦ C＋R */
 
     {
         entrance: "center-right",
@@ -1061,14 +962,11 @@ const patterns = [
             "中央奥にミューズ部屋があります！",
 
         recommendation:
-            "☆ 中央から進むのがおすすめです！"
+            "⭐ 中央から進むのがおすすめです！"
     },
 
 
-    /* ⑧ C＋R
-       C → 1マス部屋＋十字
-       R → 凸字
-    */
+    /* ⑧ C＋R */
 
     {
         entrance: "center-right",
@@ -1082,14 +980,11 @@ const patterns = [
             "中央奥やや右側にミューズ部屋があります！",
 
         recommendation:
-            "☆ 中央から進んで、右を目指すのがおすすめです！"
+            "⭐ 中央から進んで、右を目指すのがおすすめです！"
     },
 
 
-    /* ⑨ L＋R
-       L → 逆ト字
-       R → 逆L字
-    */
+    /* ⑨ L＋R */
 
     {
         entrance: "right-left",
@@ -1103,14 +998,11 @@ const patterns = [
             "右側にミューズ部屋があります！",
 
         recommendation:
-            "☆ 右側を進み、突き当りで左に進むのがおすすめです！"
+            "⭐ 右側を進み、突き当りで左に進むのがおすすめです！"
     },
 
 
-    /* ⑩ L＋R
-       L → 逆L字
-       R → 複合形
-    */
+    /* ⑩ L＋R */
 
     {
         entrance: "right-left",
@@ -1124,7 +1016,7 @@ const patterns = [
             "右側にミューズ部屋があります！",
 
         recommendation:
-            "☆ 右側を進むのがおすすめです！"
+            "⭐ 右側を進むのがおすすめです！"
     }
 
 ];
@@ -1136,47 +1028,36 @@ const patterns = [
 
 const shapeNames = {
 
-    i:
-        "I字",
+    i: "I字",
 
-    l:
-        "L字",
+    l: "L字",
 
-    "reverse-l":
-        "逆L字",
+    "reverse-l": "逆L字",
 
-    "reverse-t":
-        "逆トの字",
+    "reverse-t": "逆トの字",
 
-    t:
-        "トの字",
+    horizontal: "横棒",
 
-    horizontal:
-        "横棒",
+    t: "トの字",
 
-    convex:
-        "凸の字",
+    room: "1マス部屋",
 
-    "one-room":
-        "1マス部屋",
+    "room-cross": "1マス部屋＋十字",
 
-    "room-cross":
-        "1マス部屋＋十字",
+    "room-hall": "1マス部屋＋ホール",
 
-    "room-hall":
-        "1マス部屋＋ホール",
+    "room-i": "1マス部屋＋I字",
 
-    "room-i":
-        "1マス＋I字",
+    convex: "凸",
+
+    complex: "逆L字＋横棒",
+
+    "double-reverse":
+        "逆L字＋逆さま逆L字",
 
     "large-room":
-        "大部屋",
+        "大部屋"
 
-    complex:
-        "逆L字＋横棒",
-
-    "double-reverse-l":
-        "Y字状の複合通路"
 };
 
 
@@ -1185,7 +1066,9 @@ const shapeNames = {
 ===================================================== */
 
 let currentEntrance = null;
+
 let answers = {};
+
 let currentDirection = null;
 
 
@@ -1202,11 +1085,12 @@ function selectEntrance(entrance) {
     hideAllScreens();
 
     /*
-       特殊条件は
-       「中央＋左」のときだけ確認
-    */
+     * 特殊条件は中央＋左
+     */
 
-    if (entrance === "center-left") {
+    if (
+        entrance === "center-left"
+    ) {
 
         document
             .getElementById("special-screen")
@@ -1226,11 +1110,15 @@ function selectEntrance(entrance) {
 
 function specialAnswer(hasRoom) {
 
+    /*
+     * 左側に入ってすぐ部屋
+     */
+
     if (hasRoom) {
 
         showResult(
             "左側にミューズ部屋があります！",
-            "☆ 左に入ってすぐに部屋があるなら、確定で左側にミューズがあります！"
+            "⭐ 左に入ってすぐに部屋があるなら、左側から進むのがおすすめです！"
         );
 
         return;
@@ -1243,46 +1131,54 @@ function specialAnswer(hasRoom) {
 
 
 /* =====================================================
-   必要な方向を取得
+   入口ごとの確認方向
 ===================================================== */
 
 function getRequiredDirections() {
 
-    if (currentEntrance === "right-left") {
+    if (
+        currentEntrance ===
+        "right-left"
+    ) {
 
         return [
             "left",
             "right"
         ];
-
     }
 
-    if (currentEntrance === "center-right") {
+    if (
+        currentEntrance ===
+        "center-right"
+    ) {
 
         return [
             "center",
             "right"
         ];
-
     }
 
-    if (currentEntrance === "center-left") {
+    if (
+        currentEntrance ===
+        "center-left"
+    ) {
 
         return [
             "center",
             "left"
         ];
-
     }
 
-    if (currentEntrance === "center-right-left") {
+    if (
+        currentEntrance ===
+        "center-right-left"
+    ) {
 
         return [
             "left",
             "center",
             "right"
         ];
-
     }
 
     return [];
@@ -1298,7 +1194,8 @@ function getAvailableShapes(
     direction
 ) {
 
-    const availableShapes = new Set();
+    const availableShapes =
+        new Set();
 
     patterns
         .filter(
@@ -1320,7 +1217,9 @@ function getAvailableShapes(
             }
         );
 
-    return Array.from(availableShapes);
+    return Array.from(
+        availableShapes
+    );
 }
 
 
@@ -1335,10 +1234,6 @@ function showNextShape() {
     const requiredDirections =
         getRequiredDirections();
 
-    /*
-       まだ選択していない方向
-    */
-
     const nextDirection =
         requiredDirections.find(
             direction =>
@@ -1346,8 +1241,8 @@ function showNextShape() {
         );
 
     /*
-       全部選択済み
-    */
+     * 全部回答済み
+     */
 
     if (!nextDirection) {
 
@@ -1361,18 +1256,18 @@ function showNextShape() {
 
     const directionNames = {
 
-        center:
-            "中央",
+        center: "中央",
 
-        right:
-            "右",
+        right: "右",
 
-        left:
-            "左"
+        left: "左"
+
     };
 
     document
-        .getElementById("shape-question")
+        .getElementById(
+            "shape-question"
+        )
         .textContent =
         `${directionNames[nextDirection]}の通路はどの形？`;
 
@@ -1384,27 +1279,26 @@ function showNextShape() {
 
     const choices =
         document
-            .getElementById("shape-choices");
+            .getElementById(
+                "shape-choices"
+            );
 
     choices.innerHTML = "";
-
-
-    /*
-       図形ボタン生成
-    */
 
     availableShapes.forEach(
         shape => {
 
             const button =
-                document.createElement("button");
+                document.createElement(
+                    "button"
+                );
 
             button.className =
                 "shape-button";
 
             button.innerHTML =
-                createShapeHTML(shape) +
-
+                createShapeHTML(shape)
+                +
                 `
                 <span class="shape-name">
                     ${shapeNames[shape]}
@@ -1426,8 +1320,9 @@ function showNextShape() {
         }
     );
 
-
-    if (availableShapes.length === 0) {
+    if (
+        availableShapes.length === 0
+    ) {
 
         choices.innerHTML = `
             <div class="not-found">
@@ -1438,7 +1333,9 @@ function showNextShape() {
     }
 
     document
-        .getElementById("shape-screen")
+        .getElementById(
+            "shape-screen"
+        )
         .classList
         .remove("hidden");
 }
@@ -1488,7 +1385,7 @@ function createShapeHTML(shape) {
     }
 
 
-    /* 逆ト字 */
+    /* 逆ト */
 
     if (shape === "reverse-t") {
 
@@ -1501,34 +1398,151 @@ function createShapeHTML(shape) {
     }
 
 
-    /* ト字 */
+    /* 横棒 */
 
-    if (shape === "t") {
+    if (shape === "horizontal") {
 
         return `
-            <div class="shape shape-t">
-                <div class="shape-line vertical"></div>
+            <div class="shape shape-horizontal">
                 <div class="shape-line horizontal"></div>
             </div>
         `;
     }
 
 
-    /* 横棒 */
+    /* トの字 */
 
-    if (shape === "horizontal") {
+    if (shape === "t") {
 
         return `
             <div class="shape">
                 <div
                     class="shape-line"
                     style="
-                        width:125px;
-                        height:5px;
-                        left:13px;
-                        top:53px;
+                        width:6px;
+                        height:80px;
+                        left:69px;
+                        top:25px;
                     "
                 ></div>
+
+                <div
+                    class="shape-line"
+                    style="
+                        width:105px;
+                        height:6px;
+                        left:20px;
+                        top:25px;
+                    "
+                ></div>
+            </div>
+        `;
+    }
+
+
+    /* ================================
+       1マス部屋
+    ================================= */
+
+    if (shape === "room") {
+
+        return `
+            <div class="shape shape-room">
+                <div class="room-box"></div>
+            </div>
+        `;
+    }
+
+
+    /* ================================
+       1マス部屋＋十字
+
+       十
+       □
+       ↑
+    ================================= */
+
+    if (shape === "room-cross") {
+
+        return `
+            <div class="shape shape-room-cross">
+
+                <div class="cross"></div>
+
+                <div class="room-box"></div>
+
+                <div class="entrance"></div>
+
+            </div>
+        `;
+    }
+
+
+    /* ================================
+       1マス部屋＋ホール
+
+       大きい四角
+          □
+          ↑
+    ================================= */
+
+    if (shape === "room-hall") {
+
+        return `
+            <div class="shape shape-room-hall">
+
+                <div class="hall"></div>
+
+                <div class="room-box"></div>
+
+                <div class="entrance"></div>
+
+            </div>
+        `;
+    }
+
+
+    /* ================================
+       1マス＋I字
+    ================================= */
+
+    if (shape === "room-i") {
+
+        return `
+            <div class="shape">
+
+                <div
+                    class="shape-line"
+                    style="
+                        width:6px;
+                        height:35px;
+                        left:69px;
+                        top:5px;
+                    "
+                ></div>
+
+                <div
+                    style="
+                        position:absolute;
+                        width:28px;
+                        height:28px;
+                        left:58px;
+                        top:38px;
+                        border:5px solid #8e75c4;
+                        background:white;
+                    "
+                ></div>
+
+                <div
+                    class="shape-line"
+                    style="
+                        width:6px;
+                        height:35px;
+                        left:69px;
+                        top:66px;
+                    "
+                ></div>
+
             </div>
         `;
     }
@@ -1539,106 +1553,76 @@ function createShapeHTML(shape) {
     if (shape === "convex") {
 
         return `
-            <div class="shape">
+            <div class="shape shape-convex">
+
                 <svg
-                    width="150"
-                    height="110"
-                    viewBox="0 0 150 110"
+                    viewBox="0 0 145 110"
                     xmlns="http://www.w3.org/2000/svg"
                 >
+
                     <polyline
                         points="
-                            8,90
-                            8,45
-                            53,45
-                            58,12
-                            95,12
-                            95,45
-                            140,45
-                            140,90
-                            8,90
+                            8,88
+                            8,52
+                            50,52
+                            50,20
+                            95,20
+                            95,52
+                            137,52
+                            137,88
+                            8,88
                         "
+
                         fill="none"
-                        stroke="#51465c"
-                        stroke-width="5"
+
+                        stroke="#8e75c4"
+
+                        stroke-width="6"
+
                         stroke-linejoin="round"
+
                         stroke-linecap="round"
                     />
+
                 </svg>
-            </div>
-        `;
-    }
-
-
-    /* 1マス部屋 */
-
-    if (shape === "one-room") {
-
-        return `
-            <div class="shape shape-one-room">
-                <div class="room"></div>
-            </div>
-        `;
-    }
-
-
-    /*
-       ★ 1マス部屋＋十字
-
-             十
-             □
-
-       十と□を接続
-    */
-
-    if (shape === "room-cross") {
-
-        return `
-            <div class="shape shape-room-cross">
-
-                <div class="cross"></div>
-
-                <div class="room"></div>
 
             </div>
         `;
     }
 
 
-    /*
-       ★ 1マス部屋＋ホール
+    /* 逆L＋横棒 */
 
-       ┌────────┐
-       │        │
-       │        │
-       └────┬───┘
-            □
-    */
-
-    if (shape === "room-hall") {
+    if (shape === "complex") {
 
         return `
-            <div class="shape shape-room-hall">
+            <div class="shape shape-complex">
 
-                <div class="hall"></div>
+                <svg
+                    viewBox="0 0 145 110"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
 
-                <div class="room"></div>
+                    <polyline
+                        points="
+                            8,88
+                            66,88
+                            66,25
+                            137,25
+                        "
 
-            </div>
-        `;
-    }
+                        fill="none"
 
+                        stroke="#8e75c4"
 
-    /* 1マス＋I字 */
+                        stroke-width="6"
 
-    if (shape === "room-i") {
+                        stroke-linejoin="round"
 
-        return `
-            <div class="shape shape-room-i">
+                        stroke-linecap="round"
+                    />
 
-                <div class="room"></div>
-
-                <div class="vertical"></div>
+                </svg>
 
             </div>
         `;
@@ -1651,37 +1635,42 @@ function createShapeHTML(shape) {
 
         return `
             <div class="shape shape-large-room">
-                <div class="room"></div>
+                <div class="large-room"></div>
             </div>
         `;
     }
 
 
-    /* 逆L字＋横棒 */
+    /* 逆L＋逆さま逆L */
 
-    if (shape === "complex") {
+    if (shape === "double-reverse") {
 
         return `
-            <div class="shape shape-complex">
+            <div class="shape shape-double-reverse">
 
                 <svg
-                    width="150"
-                    height="110"
-                    viewBox="0 0 150 110"
+                    viewBox="0 0 145 110"
                     xmlns="http://www.w3.org/2000/svg"
                 >
 
                     <polyline
                         points="
-                            5,82
-                            65,82
-                            62,18
-                            145,18
+                            8,82
+                            45,82
+                            45,35
+                            75,35
+                            75,75
+                            137,75
                         "
+
                         fill="none"
-                        stroke="#51465c"
-                        stroke-width="5"
+
+                        stroke="#8e75c4"
+
+                        stroke-width="6"
+
                         stroke-linejoin="round"
+
                         stroke-linecap="round"
                     />
 
@@ -1690,68 +1679,6 @@ function createShapeHTML(shape) {
             </div>
         `;
     }
-
-
-    /* Y字状の複合通路 */
-
-    if (shape === "double-reverse-l") {
-
-        return `
-            <div class="shape shape-double-reverse-l">
-
-                <svg
-                    width="150"
-                    height="110"
-                    viewBox="0 0 150 110"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-
-                    <polyline
-                        points="
-                            10,75
-                            55,75
-                            55,45
-                            55,15
-                        "
-                        fill="none"
-                        stroke="#51465c"
-                        stroke-width="5"
-                        stroke-linejoin="round"
-                        stroke-linecap="round"
-                    />
-
-                    <polyline
-                        points="
-                            55,45
-                            105,45
-                            105,85
-                        "
-                        fill="none"
-                        stroke="#51465c"
-                        stroke-width="5"
-                        stroke-linejoin="round"
-                        stroke-linecap="round"
-                    />
-
-                    <polyline
-                        points="
-                            55,45
-                            105,45
-                            145,45
-                        "
-                        fill="none"
-                        stroke="#51465c"
-                        stroke-width="5"
-                        stroke-linejoin="round"
-                        stroke-linecap="round"
-                    />
-
-                </svg>
-
-            </div>
-        `;
-    }
-
 
     return "";
 }
@@ -1766,7 +1693,8 @@ function checkResult() {
     const possiblePatterns =
         patterns.filter(
             pattern =>
-                pattern.entrance === currentEntrance
+                pattern.entrance ===
+                currentEntrance
         );
 
     const matchedPattern =
@@ -1790,7 +1718,6 @@ function checkResult() {
             }
         );
 
-
     if (matchedPattern) {
 
         showResult(
@@ -1801,17 +1728,13 @@ function checkResult() {
         return;
     }
 
-
-    /*
-       未登録
-    */
-
     hideAllScreens();
 
     document
-        .getElementById("result-location")
+        .getElementById(
+            "result-location"
+        )
         .innerHTML = `
-
             <div class="not-found">
 
                 ごめんなさい。<br><br>
@@ -1823,20 +1746,18 @@ function checkResult() {
                 判定データに追加できます！
 
             </div>
-
         `;
 
     document
-        .getElementById("result-recommendation")
+        .getElementById(
+            "result-recommendation"
+        )
         .textContent = "";
 
     document
-        .getElementById("result-warning")
-        .textContent =
-            "⏰ 時間に気を付けてね！";
-
-    document
-        .getElementById("result-screen")
+        .getElementById(
+            "result-screen"
+        )
         .classList
         .remove("hidden");
 }
@@ -1854,22 +1775,23 @@ function showResult(
     hideAllScreens();
 
     document
-        .getElementById("result-location")
+        .getElementById(
+            "result-location"
+        )
         .textContent =
-            location;
+        location;
 
     document
-        .getElementById("result-recommendation")
+        .getElementById(
+            "result-recommendation"
+        )
         .textContent =
-            recommendation;
+        recommendation;
 
     document
-        .getElementById("result-warning")
-        .textContent =
-            "⏰ 時間に気を付けてね！";
-
-    document
-        .getElementById("result-screen")
+        .getElementById(
+            "result-screen"
+        )
         .classList
         .remove("hidden");
 }
@@ -1882,22 +1804,30 @@ function showResult(
 function hideAllScreens() {
 
     document
-        .getElementById("entrance-screen")
+        .getElementById(
+            "entrance-screen"
+        )
         .classList
         .add("hidden");
 
     document
-        .getElementById("special-screen")
+        .getElementById(
+            "special-screen"
+        )
         .classList
         .add("hidden");
 
     document
-        .getElementById("shape-screen")
+        .getElementById(
+            "shape-screen"
+        )
         .classList
         .add("hidden");
 
     document
-        .getElementById("result-screen")
+        .getElementById(
+            "result-screen"
+        )
         .classList
         .add("hidden");
 }
@@ -1918,7 +1848,9 @@ function goHome() {
     hideAllScreens();
 
     document
-        .getElementById("entrance-screen")
+        .getElementById(
+            "entrance-screen"
+        )
         .classList
         .remove("hidden");
 }
